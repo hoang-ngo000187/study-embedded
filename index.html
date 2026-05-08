@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Embedded</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  /* ── LATEX-STYLE TYPOGRAPHY ── */
+  @import url('https://fonts.googleapis.com/css2?family=Computer+Modern+Serif:ital,wght@0,400;0,700;1,400&family=Latin+Modern+Mono&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a1a;
+    --muted: #555;
+    --border: #d0d0c8;
+    --tag-bg: #f4f3ee;
+    --hover: #f0efe9;
+    --accent: #2a5caa;
+    --font-serif: 'Georgia', 'Times New Roman', serif;
+    --font-mono: 'Courier New', monospace;
+  }
+
+  body {
+    font-family: var(--font-serif);
+    background: #fff;
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    border-bottom: 1.5px solid var(--ink);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    min-height: 56px;
+  }
+
+  .nav-brand {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--font-serif);
+    white-space: nowrap;
+  }
+
+  .nav-brand span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    list-style: none;
+  }
+
+  .nav-links li a {
+    display: block;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.88rem;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--font-serif);
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.15s;
+  }
+
+  .nav-links li a:hover,
+  .nav-links li a.active {
+    border-bottom-color: var(--ink);
+  }
+
+  /* ── LAYOUT ── */
+  .wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  /* ── MAIN POSTS ── */
+  .section-title {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-card {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-card:last-child { border-bottom: none; }
+
+  .post-meta {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    margin-bottom: 0.4rem;
+  }
+
+  .post-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .post-title:hover { text-decoration: underline; }
+
+  .post-tags { margin-bottom: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .post-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    padding: 0.1rem 0.5rem;
+    border-radius: 2px;
+    color: var(--muted);
+  }
+
+  .post-excerpt {
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.75;
+    margin-bottom: 0.75rem;
+  }
+
+  .read-more {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .read-more:hover { border-bottom-color: var(--accent); }
+
+  /* ── EXCALIDRAW ILLUSTRATION ── */
+  .sketch-wrap {
+    margin: 1rem 0 0.75rem;
+    background: #fafaf8;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar { display: flex; flex-direction: column; gap: 2rem; }
+
+  .sidebar-block {}
+
+  /* Search */
+  .search-bar {
+    display: flex;
+    border: 1.5px solid var(--ink);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .search-bar input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    padding: 0.45rem 0.75rem;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .search-bar button {
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    padding: 0 0.75rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.15s;
+  }
+
+  .search-bar button:hover { background: #333; }
+
+  /* Tags cloud */
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .tag-item {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    border: 1px solid var(--border);
+    padding: 0.15rem 0.55rem;
+    border-radius: 2px;
+    color: var(--muted);
+    cursor: pointer;
+    background: #fff;
+    transition: background 0.12s, color 0.12s;
+  }
+  .tag-item:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .tag-item.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  /* Recent posts */
+  .recent-list { list-style: none; }
+  .recent-list li {
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+    line-height: 1.4;
+  }
+  .recent-list li:last-child { border-bottom: none; }
+  .recent-list li a { color: var(--ink); text-decoration: none; }
+  .recent-list li a:hover { text-decoration: underline; }
+  .recent-date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); display: block; }
+
+  /* Social icons */
+  .social-links { display: flex; gap: 1rem; align-items: center; }
+  .social-links a {
+    color: var(--muted);
+    font-size: 1.2rem;
+    transition: color 0.15s;
+  }
+  .social-links a:hover { color: var(--ink); }
+  .social-links a[title="Gmail"]:hover { color: #EA4335; }
+  .social-links a[title="LinkedIn"]:hover { color: #0A66C2; }
+  .social-links a[title="Facebook"]:hover { color: #1877F2; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1.5px solid var(--ink);
+    text-align: center;
+    padding: 1.25rem 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 680px) {
+    .wrapper { grid-template-columns: 1fr; gap: 2rem; }
+    nav { flex-direction: column; align-items: flex-start; padding: 0.75rem 1rem; }
+    .nav-links { gap: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ NAVBAR ══════════ -->
+<nav>
+  <a class="nav-brand" href="#">Study <span>Embedded</span></a>
+  <ul class="nav-links">
+    <!--
+      ╔══════════════════════════════════════════════════════════╗
+      ║  THÊM MỤC MỚI VÀO THANH ĐIỀU HƯỚNG                     ║
+      ║  Sao chép dòng dưới đây và đổi tên + link cho phù hợp: ║
+      ║  <li><a href="ten-muc.html">Tên Mục</a></li>            ║
+      ╚══════════════════════════════════════════════════════════╝
+    -->
+    <li><a href="#" class="active">Home</a></li>
+    <li><a href="about.html">About me</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="stm32.html">STM32</a></li>
+    <li><a href="embedded-linux.html">Embedded Linux</a></li>
+    <li><a href="dsa.html">DSA</a></li>
+    <!-- THÊM MỤC MỚI DƯỚI ĐÂY -->
+    <!-- <li><a href="ten-muc.html">Tên Mục</a></li> -->
+  </ul>
+</nav>
+
+<!-- ══════════ BODY ══════════ -->
+<div class="wrapper">
+
+  <!-- ── MAIN CONTENT ── -->
+  <main>
+    <p class="section-title">Recent posts</p>
+
+    <!-- POST 1 -->
+    <article class="post-card">
+      <p class="post-meta">2025-04-20 &nbsp;·&nbsp; STM32 &nbsp;·&nbsp; 8 min read</p>
+      <h2 class="post-title">Bare-metal UART trên STM32F4 — không cần HAL</h2>
+      <div class="post-tags">
+        <span class="post-tag">STM32</span>
+        <span class="post-tag">UART</span>
+        <span class="post-tag">bare-metal</span>
+        <span class="post-tag">C</span>
+      </div>
+
+      <!-- Excalidraw-style sketch -->
+      <div class="sketch-wrap">
+        <svg width="420" height="140" viewBox="0 0 420 140" font-family="'Patrick Hand', 'Segoe UI', sans-serif">
+          <!-- rough style via slight path imperfection -->
+          <!-- MCU box -->
+          <rect x="20" y="30" width="120" height="80" rx="4" fill="#fafaf8" stroke="#1a1a1a" stroke-width="2" stroke-dasharray="0"/>
+          <text x="80" y="60" text-anchor="middle" font-size="13" fill="#1a1a1a" font-weight="700">STM32F4</text>
+          <text x="80" y="78" text-anchor="middle" font-size="11" fill="#555">USART2</text>
+          <!-- TX pin -->
+          <line x1="140" y1="65" x2="190" y2="65" stroke="#1a1a1a" stroke-width="2" stroke-dasharray="5,3"/>
+          <text x="163" y="58" text-anchor="middle" font-size="10" fill="#2a5caa">TX (PA2)</text>
+          <!-- RX pin -->
+          <line x1="140" y1="85" x2="190" y2="85" stroke="#1a1a1a" stroke-width="2" stroke-dasharray="5,3"/>
+          <text x="163" y="98" text-anchor="middle" font-size="10" fill="#2a5caa">RX (PA3)</text>
+          <!-- USB-UART chip -->
+          <rect x="190" y="48" width="80" height="55" rx="4" fill="#fafaf8" stroke="#1a1a1a" stroke-width="2"/>
+          <text x="230" y="72" text-anchor="middle" font-size="11" fill="#1a1a1a" font-weight="700">CP2102</text>
+          <text x="230" y="88" text-anchor="middle" font-size="10" fill="#555">USB-UART</text>
+          <!-- Arrow to PC -->
+          <line x1="270" y1="75" x2="340" y2="75" stroke="#1a1a1a" stroke-width="2"/>
+          <polygon points="340,70 350,75 340,80" fill="#1a1a1a"/>
+          <!-- PC box -->
+          <rect x="350" y="50" width="55" height="50" rx="3" fill="#fafaf8" stroke="#1a1a1a" stroke-width="2"/>
+          <text x="377" y="80" text-anchor="middle" font-size="11" fill="#1a1a1a">PC</text>
+          <text x="305" y="62" text-anchor="middle" font-size="10" fill="#555">USB</text>
+          <!-- GND line -->
+          <line x1="80" y1="110" x2="80" y2="128" stroke="#1a1a1a" stroke-width="1.5"/>
+          <line x1="65" y1="128" x2="95" y2="128" stroke="#1a1a1a" stroke-width="1.5"/>
+          <line x1="70" y1="132" x2="90" y2="132" stroke="#1a1a1a" stroke-width="1"/>
+          <line x1="75" y1="136" x2="85" y2="136" stroke="#1a1a1a" stroke-width="0.75"/>
+        </svg>
+      </div>
+
+      <p class="post-excerpt">
+        Trong bài viết này, mình sẽ hướng dẫn cách cấu hình UART trực tiếp qua thanh ghi trên STM32F4 mà không cần thư viện HAL. Việc hiểu rõ hoạt động ở tầng thấp giúp bạn debug nhanh hơn và viết firmware hiệu quả hơn. Chúng ta sẽ bắt đầu từ việc bật clock cho USART2, cấu hình GPIO alternate function, rồi đến việc thiết lập baud rate và frame format...
+      </p>
+      <a class="read-more" href="#">Read more →</a>
+    </article>
+
+    <!-- POST 2 -->
+    <article class="post-card">
+      <p class="post-meta">2025-04-05 &nbsp;·&nbsp; Embedded Linux &nbsp;·&nbsp; 12 min read</p>
+      <h2 class="post-title">Buildroot từ A → Z: build một Linux tối giản cho Raspberry Pi</h2>
+      <div class="post-tags">
+        <span class="post-tag">Embedded Linux</span>
+        <span class="post-tag">Buildroot</span>
+        <span class="post-tag">Raspberry Pi</span>
+        <span class="post-tag">rootfs</span>
+      </div>
+
+      <div class="sketch-wrap">
+        <svg width="420" height="130" viewBox="0 0 420 130" font-family="'Patrick Hand', 'Segoe UI', sans-serif">
+          <!-- Pipeline diagram -->
+          <rect x="10" y="40" width="80" height="50" rx="4" fill="#fafaf8" stroke="#1a1a1a" stroke-width="2"/>
+          <text x="50" y="62" text-anchor="middle" font-size="11" fill="#1a1a1a" font-weight="700">Toolchain</text>
+          <text x="50" y="78" text-anchor="middle" font-size="10" fill="#555">cross-gcc</text>
+
+          <line x1="90" y1="65" x2="115" y2="65" stroke="#1a1a1a" stroke-width="2"/>
+          <polygon points="115,60 125,65 115,70" fill="#1a1a1a"/>
+
+          <rect x="125" y="40" width="80" height="50" rx="4" fill="#fafaf8" stroke="#1a1a1a" stroke-width="2"/>
+          <text x="165" y="62" text-anchor="middle" font-size="11" fill="#1a1a1a" font-weight="700">Kernel</text>
+          <text x="165" y="78" text-anchor="middle" font-size="10" fill="#555">Linux 6.x</text>
+
+          <line x1="205" y1="65" x2="230" y2="65" stroke="#1a1a1a" stroke-width="2"/>
+          <polygon points="230,60 240,65 230,70" fill="#1a1a1a"/>
+
+          <rect x="240" y="40" width="80" height="50" rx="4" fill="#fafaf8" stroke="#1a1a1a" stroke-width="2"/>
+          <text x="280" y="62" text-anchor="middle" font-size="11" fill="#1a1a1a" font-weight="700">rootfs</text>
+          <text x="280" y="78" text-anchor="middle" font-size="10" fill="#555">BusyBox</text>
+
+          <line x1="320" y1="65" x2="345" y2="65" stroke="#1a1a1a" stroke-width="2"/>
+          <polygon points="345,60 355,65 345,70" fill="#1a1a1a"/>
+
+          <rect x="355" y="35" width="58" height="60" rx="4" fill="#fafaf8" stroke="#2a5caa" stroke-width="2"/>
+          <text x="384" y="58" text-anchor="middle" font-size="10" fill="#2a5caa" font-weight="700">SD Card</text>
+          <text x="384" y="72" text-anchor="middle" font-size="10" fill="#555">image</text>
+          <text x="384" y="86" text-anchor="middle" font-size="9" fill="#555">.img</text>
+        </svg>
+      </div>
+
+      <p class="post-excerpt">
+        Buildroot là một trong những công cụ phổ biến nhất để xây dựng hệ thống Linux nhúng tối giản. Thay vì cài đặt một distro đầy đủ, bạn chỉ cần đúng những gì thiết bị yêu cầu — từ toolchain cross-compilation, kernel config, cho đến root filesystem. Bài viết sẽ đi qua toàn bộ pipeline từ lúc chạy <code>make menuconfig</code> đến khi có file <code>.img</code> sẵn sàng ghi vào thẻ SD...
+      </p>
+      <a class="read-more" href="#">Read more →</a>
+    </article>
+  </main>
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+
+    <!-- Search -->
+    <div class="sidebar-block">
+      <p class="section-title">Search</p>
+      <div class="search-bar">
+        <input type="text" placeholder="Search posts..." aria-label="Search posts">
+        <button aria-label="Search"><i class="fa fa-search"></i></button>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="sidebar-block">
+      <p class="section-title">Contact</p>
+      <div class="social-links">
+        <a href="mailto:your@gmail.com" title="Gmail" aria-label="Gmail">
+          <i class="fa-brands fa-google" style="color:#EA4335"></i>
+        </a>
+        <a href="https://linkedin.com/in/yourprofile" title="LinkedIn" target="_blank" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin" style="color:#0A66C2"></i>
+        </a>
+        <a href="https://facebook.com/yourprofile" title="Facebook" target="_blank" aria-label="Facebook">
+          <i class="fa-brands fa-facebook" style="color:#1877F2"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Tags -->
+    <div class="sidebar-block">
+      <p class="section-title">Tags</p>
+      <div class="tag-cloud">
+        <span class="tag-item active">All</span>
+        <span class="tag-item">STM32</span>
+        <span class="tag-item">RTOS</span>
+        <span class="tag-item">Embedded Linux</span>
+        <span class="tag-item">Buildroot</span>
+        <span class="tag-item">Yocto</span>
+        <span class="tag-item">Device Driver</span>
+        <span class="tag-item">FreeRTOS</span>
+        <span class="tag-item">C/C++</span>
+        <span class="tag-item">Linked List</span>
+        <span class="tag-item">UART</span>
+        <span class="tag-item">SPI</span>
+        <span class="tag-item">I2C</span>
+        <span class="tag-item">Raspberry Pi</span>
+        <span class="tag-item">DSA</span>
+      </div>
+    </div>
+
+    <!-- Recent posts -->
+    <div class="sidebar-block">
+      <p class="section-title">Recent posts</p>
+      <ul class="recent-list">
+        <li>
+          <a href="#">Bare-metal UART trên STM32F4</a>
+          <span class="recent-date">2025-04-20</span>
+        </li>
+        <li>
+          <a href="#">Buildroot từ A → Z cho Raspberry Pi</a>
+          <span class="recent-date">2025-04-05</span>
+        </li>
+        <li>
+          <a href="#">Linked List trong C — viết từ đầu</a>
+          <span class="recent-date">2025-03-18</span>
+        </li>
+        <li>
+          <a href="#">FreeRTOS Task Scheduling cơ bản</a>
+          <span class="recent-date">2025-03-02</span>
+        </li>
+        <li>
+          <a href="#">Device Tree là gì? Giải thích từ cơ bản</a>
+          <span class="recent-date">2025-02-14</span>
+        </li>
+      </ul>
+    </div>
+
+  </aside>
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  © 2025 Study Embedded &nbsp;·&nbsp; Built with ♥ and bare-metal code
+</footer>
+
+<script>
+  // Tag filter toggle (visual only — wire up to actual filtering in full build)
+  document.querySelectorAll('.tag-item').forEach(tag => {
+    tag.addEventListener('click', () => {
+      document.querySelectorAll('.tag-item').forEach(t => t.classList.remove('active'));
+      tag.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
