@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeetCode | hoango._.studycorner</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Computer+Modern+Serif:ital,wght@0,400;0,700;1,400&family=Latin+Modern+Mono&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a1a;
+    --muted: #555;
+    --border: #d0d0c8;
+    --tag-bg: #f4f3ee;
+    --hover: #f0efe9;
+    --accent: #2a5caa;
+    --font-serif: 'Georgia', 'Times New Roman', serif;
+    --font-mono: 'Courier New', monospace;
+  }
+
+  body {
+    font-family: var(--font-serif);
+    background: #fff;
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  nav {
+    border-bottom: 1.5px solid var(--ink);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    min-height: 56px;
+  }
+
+  .nav-brand {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--font-serif);
+    white-space: nowrap;
+  }
+
+  .nav-brand span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    list-style: none;
+  }
+
+  .nav-links li a {
+    display: block;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.88rem;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--font-serif);
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.15s;
+  }
+
+  .nav-links li a:hover,
+  .nav-links li a.active {
+    border-bottom-color: var(--ink);
+  }
+
+  .wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .section-title {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-card {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-meta {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    margin-bottom: 0.4rem;
+  }
+
+  .post-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.9rem;
+    color: var(--ink);
+  }
+
+  .post-tags { margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .post-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.65rem;
+    border-radius: 2px;
+    color: var(--muted);
+  }
+
+  .post-excerpt,
+  .post-content p {
+    font-size: 0.97rem;
+    color: #333;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
+  .code-block {
+    font-family: var(--font-mono);
+    background: #f7f7f7;
+    border: 1px solid var(--border);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+  }
+
+  .sidebar { display: flex; flex-direction: column; gap: 2rem; }
+
+  .sidebar-block {}
+
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .tag-item {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    border: 1px solid var(--border);
+    padding: 0.15rem 0.55rem;
+    border-radius: 2px;
+    color: var(--muted);
+    cursor: pointer;
+    background: #fff;
+    transition: background 0.12s, color 0.12s;
+  }
+
+  .tag-item:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .tag-item.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  footer {
+    border-top: 1.5px solid var(--ink);
+    text-align: center;
+    padding: 1.25rem 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 680px) {
+    .wrapper { grid-template-columns: 1fr; gap: 2rem; }
+    nav { flex-direction: column; align-items: flex-start; padding: 0.75rem 1rem; }
+    .nav-links { gap: 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">Study <span>Embedded</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About me</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="stm32.html">STM32</a></li>
+    <li><a href="embedded-linux.html">Embedded Linux</a></li>
+    <li><a href="dsa.html">DSA</a></li>
+    <li><a href="leetcode.html" class="active">LeetCode</a></li>
+  </ul>
+</nav>
+
+<div class="wrapper">
+  <main>
+    <article class="post-card">
+      <p class="post-meta">2026-06-05 · LeetCode · 7 min read</p>
+      <h1 class="post-title">Giải LeetCode 217: Contains Duplicates</h1>
+      <div class="post-tags">
+        <span class="post-tag">LeetCode</span>
+        <span class="post-tag">Algorithm</span>
+        <span class="post-tag">Hash Set</span>
+        <span class="post-tag">C++</span>
+      </div>
+
+      <div class="post-content">
+        <h2>02. <a href="https://leetcode.com/problems/contains-duplicate/description/" target="_blank">Contains Duplicates</a> (LeetCode #217)</h2>
+        <p><em>Hoang Ngo June 05, 2026</em></p>
+
+        <h3>1. Hiểu rõ vấn đề cần giải quyết</h3>
+        <p>You are given an array of integers, <code>nums</code>. Your task is to determine whether any value appears at least twice in the array. In other words, you should return <code>true</code> if there are any duplicate elements, and <code>false</code> otherwise.</p>
+        <p><strong>Example:</strong></p>
+        <p>Input: <code>nums = [1, 2, 3, 1]</code><br>→ Output: <code>true</code> (because the number 1 appears twice)</p>
+        <p>Input: <code>nums = [1, 2, 3, 4]</code><br>→ Output: <code>false</code> (because no element appears more than once)</p>
+        <p>The challenge is to find a solution that works efficiently with large input arrays.</p>
+
+        <h3>2. Brute Force Approach</h3>
+        <p>Cách đơn giản nhất để giải quyết vấn đề này là so sánh từng phần tử với mọi phần tử khác trong mảng. Phương pháp vét cạn này hoạt động được, nhưng nó có một nhược điểm đáng kể về hiệu quả.</p>
+        <div class="code-block"><code>bool containsDuplicate(vector<int>& nums) {
+    for (int i = 0; i < nums.size(); i++) {
+        for (int j = i + 1; j < nums.size(); j++) {
+            if (nums[i] == nums[j]) {
+                return true;
+            }
+        }
+    }
+    return false;
+}</code></div>
+        <p>Trong giải pháp này, chúng ta sử dụng hai vòng lặp lồng nhau để so sánh từng phần tử với mọi phần tử khác, dẫn đến độ phức tạp thời gian là <strong>O(n<sup>2</sup>)</strong>. Mặc dù phương pháp này sẽ cho ra kết quả chính xác, nhưng nó không phù hợp với các tập dữ liệu lớn vì mất quá nhiều thời gian để xử lý.</p>
+
+        <h3>3. Efficient Solution - I: Sắp xếp trước rồi kiểm tra</h3>
+        <p>Ý tưởng: Nếu có các phần tử trùng nhau thì sau khi sắp xếp chúng sẽ nằm cạnh nhau.</p>
+        <p>Ví dụ:</p>
+        <div class="code-block"><code>[1,2,4,2,7,6,3]</code></div>
+        <p>Sau khi sort:</p>
+        <div class="code-block"><code>[1,2,2,3,4,6,7]</code></div>
+        <p>Ta chỉ cần kiểm tra:</p>
+        <div class="code-block"><code>nums[i] == nums[i + 1]</code></div>
+        <p>Nếu đúng ⇒ có phần tử trùng.</p>
+        <div class="code-block"><code>sort(nums.begin(), nums.end());
+
+for (int i = 0; i < n - 1; i++) {
+    if (nums[i] == nums[i + 1])
+        return true;
+}
+
+return false;</code></div>
+        <p>Độ phức tạp</p>
+        <ul>
+          <li>Sort: <strong>O(n log n)</strong></li>
+          <li>Duyệt mảng: <strong>O(n)</strong></li>
+        </ul>
+        <p>Tổng: <strong>O(n log n)</strong></p>
+        <p>Space: thường <strong>O(1)</strong> hoặc phụ thuộc thuật toán sort.</p>
+
+        <h3>4. Efficient Solution - II: Hash Set (Tối ưu nhất)</h3>
+        <p><strong>Ý tưởng:</strong></p>
+        <ul>
+          <li>Dùng một Hash Set để lưu các phần tử đã gặp.</li>
+          <li>Khi duyệt từng phần tử:</li>
+          <li>Nếu phần tử đã tồn tại trong Set ⇒ trùng ⇒ trả về true.</li>
+          <li>Nếu chưa tồn tại ⇒ thêm vào Set.</li>
+        </ul>
+        <div class="code-block"><code>class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        unordered_set<int> s;
+
+        for (int num : nums) {
+            if (s.find(num) != s.end()) {
+                return true;
+            }
+            s.insert(num);
+        }
+
+        return false;
+    }
+};</code></div>
+
+        <h4>Time and Space Complexity</h4>
+        <ul>
+          <li><strong>Time Complexity</strong>: Độ phức tạp về thời gian của giải pháp hiệu quả là <strong>O(n)</strong>, trong đó n là số phần tử trong mảng. Chúng ta lặp qua danh sách một lần, và độ phức tạp thời gian trung bình để chèn và kiểm tra sự hiện diện trong hash set là <strong>O(1)</strong>.</li>
+          <li><strong>Space Complexity</strong>: Độ phức tạp về không gian cũng là <strong>O(n)</strong>, bởi vì, trong trường hợp xấu nhất, chúng ta có thể cần lưu trữ tất cả n phần tử trong tập hợp nếu không có phần tử trùng lặp.</li>
+        </ul>
+      </div>
+    </article>
+          <li><strong>peek</strong>: giống <code>pop</code> nhưng không lấy phần tử ra.</li>
+          <li><strong>empty</strong>: hàng đợi rỗng khi cả hai ngăn xếp đều trống.</li>
+        </ul>
+
+        <p>Vì mỗi phần tử chỉ được chuyển giữa hai stack tối đa một lần, nên mỗi thao tác có thời gian trung bình amortized là <strong>O(1)</strong>. Đây là điểm quan trọng để hiểu vì sao giải pháp vẫn hiệu quả dù có bước dịch chuyển toàn bộ stack.</p>
+
+        <p>Đây là bài đầu tiên trong mục LeetCode, và mình sẽ tiếp tục đăng các bài khác về <em>two pointers</em>, <em>dynamic programming</em>, <em>graph</em> và các kỹ thuật khác trong những bài sau.</p>
+      </div>
+    </article>
+  </main>
+
+  <aside class="sidebar">
+    <div class="sidebar-block">
+      <p class="section-title">Tags</p>
+      <div class="tag-cloud">
+        <span class="tag-item active">LeetCode</span>
+        <span class="tag-item">Algorithm</span>
+        <span class="tag-item">Stack</span>
+        <span class="tag-item">Queue</span>
+        <span class="tag-item">C++</span>
+      </div>
+    </div>
+    <div class="sidebar-block">
+      <p class="section-title">Quick links</p>
+      <ul class="recent-list">
+        <li><a href="index.html">Back to Home</a></li>
+        <li><a href="dsa.html">DSA</a></li>
+        <li><a href="stm32.html">STM32</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  © 2026 hoango._.studycorner · Built with ♥ and algorithm practice
+</footer>
+
+</body>
+</html>

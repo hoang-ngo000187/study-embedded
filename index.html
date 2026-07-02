@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Study Embedded</title>
+<title>hoango._.studycorner</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
   /* ── LATEX-STYLE TYPOGRAPHY ── */
@@ -280,6 +280,7 @@
     <li><a href="stm32.html">STM32</a></li>
     <li><a href="embedded-linux.html">Embedded Linux</a></li>
     <li><a href="dsa.html">DSA</a></li>
+    <li><a href="leetcode.html">LeetCode</a></li>
     <!-- THÊM MỤC MỚI DƯỚI ĐÂY -->
     <!-- <li><a href="ten-muc.html">Tên Mục</a></li> -->
   </ul>
@@ -291,6 +292,40 @@
   <!-- ── MAIN CONTENT ── -->
   <main>
     <p class="section-title">Recent posts</p>
+
+    <!-- POST 0: LeetCode -->
+    <article class="post-card">
+      <p class="post-meta">2026-06-05 &nbsp;·&nbsp; LeetCode &nbsp;·&nbsp; 7 min read</p>
+      <h2 class="post-title">Giải LeetCode 217: Contains Duplicates</h2>
+      <div class="post-tags">
+        <span class="post-tag">LeetCode</span>
+        <span class="post-tag">Algorithm</span>
+        <span class="post-tag">Hash Set</span>
+        <span class="post-tag">C++</span>
+      </div>
+
+      <div class="sketch-wrap">
+        <svg width="420" height="140" viewBox="0 0 420 140" font-family="'Patrick Hand', 'Segoe UI', sans-serif">
+          <rect x="40" y="32" width="120" height="70" rx="4" fill="#fafaf8" stroke="#1a1a1a" stroke-width="2"/>
+          <text x="100" y="56" text-anchor="middle" font-size="12" fill="#1a1a1a" font-weight="700">Array</text>
+          <text x="100" y="76" text-anchor="middle" font-size="10" fill="#555">nums</text>
+
+          <rect x="250" y="32" width="120" height="70" rx="4" fill="#fafaf8" stroke="#1a1a1a" stroke-width="2"/>
+          <text x="310" y="56" text-anchor="middle" font-size="12" fill="#1a1a1a" font-weight="700">Hash Set</text>
+          <text x="310" y="76" text-anchor="middle" font-size="10" fill="#555">seen values</text>
+
+          <line x1="160" y1="67" x2="250" y2="67" stroke="#1a1a1a" stroke-width="2" stroke-dasharray="5,3"/>
+          <polygon points="250,63 258,67 250,71" fill="#1a1a1a"/>
+
+          <text x="210" y="95" text-anchor="middle" font-size="10" fill="#2a5caa">Check duplicates</text>
+        </svg>
+      </div>
+
+      <p class="post-excerpt">
+        Bài viết giải LeetCode 217 bằng cách dùng Hash Set để kiểm tra nhanh phần tử trùng lặp trong mảng. Mình so sánh cách brute-force với hai cách tối ưu: sort trước và dùng Hash Set để đạt O(n).
+      </p>
+      <a class="read-more" href="leetcode.html">Read more →</a>
+    </article>
 
     <!-- POST 1 -->
     <article class="post-card">
@@ -432,6 +467,7 @@
         <span class="tag-item">Device Driver</span>
         <span class="tag-item">FreeRTOS</span>
         <span class="tag-item">C/C++</span>
+        <span class="tag-item">LeetCode</span>
         <span class="tag-item">Linked List</span>
         <span class="tag-item">UART</span>
         <span class="tag-item">SPI</span>
@@ -445,6 +481,10 @@
     <div class="sidebar-block">
       <p class="section-title">Recent posts</p>
       <ul class="recent-list">
+        <li>
+          <a href="leetcode.html">Giải LeetCode 232: Implement Queue using Stacks</a>
+          <span class="recent-date">2026-07-02</span>
+        </li>
         <li>
           <a href="#">Bare-metal UART trên STM32F4</a>
           <span class="recent-date">2025-04-20</span>
@@ -473,7 +513,7 @@
 
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
-  © 2025 Study Embedded &nbsp;·&nbsp; Built with ♥ and bare-metal code
+  © 2025 hoango._.studycorner &nbsp;·&nbsp; Built with ♥ and bare-metal code
 </footer>
 
 <script>
